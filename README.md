@@ -2,6 +2,14 @@
 
 A lightweight, high-performance cooldown and buff pulse addon for **Vanilla WoW 1.12** and **Turtle WoW**.
 
+## 📥 Download
+
+Download the latest version from the **Releases** page.
+
+https://github.com/Wurmschwanz/PulseCore/releases/latest
+
+---
+
 ## ✨ Features
 
 - ⚡ Cooldown completion alerts
@@ -15,7 +23,7 @@ A lightweight, high-performance cooldown and buff pulse addon for **Vanilla WoW 
 - 📝 Optional spell & item names
 - 📍 Movable pulse position
 - 🗺️ Movable minimap button
-- 🚀 Performance optimized for raids
+- 🚀 Optimized for maximum performance
 - 🔥 No external libraries required
 
 ## 📦 Installation
