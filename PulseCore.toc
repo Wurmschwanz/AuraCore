@@ -1,8 +1,0 @@
-## Interface: 11200
-## Title: PulseCore
-## Notes: Lightweight cooldown and persistent buff expiration alerts for Turtle WoW and Vanilla 1.12.
-## Author: Wurmschwanz
-## Version: 1.0.1
-## SavedVariables: DCP_Saved
-## SavedVariablesPerCharacter: DCP_SavedPerCharacter
-PulseCore.lua
