@@ -1,81 +1,81 @@
-# ✨ AuraCore
+# AuraCore
 
-> **Modern Buff, Proc & Aura Tracking for Vanilla World of Warcraft (1.12)**
+AuraCore is a lightweight all-in-one aura, proc, cooldown, and buff-tracking addon for Turtle WoW and other Vanilla WoW 1.12 clients.
 
-AuraCore combines **Proc Alerts**, **Buff Tracking**, and **Expiring Buff Warnings** in one lightweight addon, designed specifically for Vanilla 1.12 servers like **Turtle WoW**.
+## Features
 
----
+### Cooldown Pulses
+- Large central pulse when tracked cooldowns become ready
+- Spell, equipment, and bag-item support
+- Character-specific filters
+- Adjustable size, duration, opacity, animation, and position
 
-## 📥 Download
+### Buff Expiration Pulses
+- Alerts when tracked buffs are about to expire
+- Automatic long-duration buff detection
+- Additional buff list and blacklist
+- Optional red expiration pulse
+- Test button included
 
-Download the latest version from the **Releases** page.
+### Proc Alerts
+- ProcDoc-inspired class overlays
+- Buff- and action-based proc detection
+- Per-proc scale, opacity, and position settings
+- Optional pulse and smooth visual expiry
+- Multi-proc test mode
 
-https://github.com/Wurmschwanz/AuraCore/releases/latest
+### Active Buff Tracker
+- Clickable tracker slots
+- Tracks buffs, talent procs, and trinket procs while active
+- Empty and inactive slots stay hidden
+- Blizzard-style cooldown sweep
+- Adjustable icon size, spacing, columns, and position
+- Per-character configuration
+- Test mode and unlockable drag handle
 
----
+### Performance
+- Event-driven aura updates with adaptive fallback scans
+- No scans while the tracker is disabled or empty
+- Cached buff names and icons
+- Layout and cooldown updates only when required
 
-## 🌟 Features
+## Installation
 
-- ⚡ Modern proc alerts
-- 🛡️ Custom buff tracker
-- ⏳ Expiring buff notifications
-- 🎨 Automatic icon detection
-- 🔄 Blizzard cooldown spiral
-- ⚙️ Fully customizable
-- 👤 Per-character settings
-- 🧪 Built-in test mode
-- 🚀 Lightweight & performance optimized
+1. Download the latest release ZIP.
+2. Extract it.
+3. Copy the `AuraCore` folder into:
 
----
+   `World of Warcraft\Interface\AddOns\`
 
-## 🖥️ Compatibility
+4. Restart the game or use `/reload`.
 
-- ✅ Turtle WoW
-- ✅ Vanilla 1.12
-- ✅ SuperWoW
+The final path must be:
 
----
+`World of Warcraft\Interface\AddOns\AuraCore\AuraCore.toc`
 
-## 📦 Installation
+## Commands
 
-1. Download the latest release.
-2. Extract the archive.
-3. Copy the **AuraCore** folder into:
+- `/ac` — Open settings
+- `/ac test` — Test the main pulse
+- `/ac reset` — Reset settings
+- `/ac ignore NAME` — Add an entry to the cooldown filter
+- `/ac clear` — Clear the cooldown filter
+- `/ac invert` — Toggle cooldown filter mode
+- `/ac list` — Show the cooldown filter
 
-```text
-World of Warcraft/Interface/AddOns/
-```
+Legacy `/pc`, `/pulsecore`, and `/dcp` commands remain supported.
 
-4. Restart the game.
+## Updating from PulseCore
 
----
+AuraCore keeps the existing `DCP_Saved` and `DCP_SavedPerCharacter` SavedVariables, so current PulseCore settings are retained.
 
-## 💬 Slash Commands
+Remove the old `PulseCore` addon folder after installing AuraCore to avoid loading both versions simultaneously.
 
-```text
-/pc
-```
+## Credits
 
-or
+- Proc overlay artwork and proc data are based on ProcDoc. See `LICENSE-ProcDoc`.
+- Additional overlay artwork is based on SpellActivationOverlay. See `LICENSE-SpellActivationOverlay`.
 
-```text
-/auracore
-```
+## License
 
----
-
-## ❤️ Credits
-
-AuraCore is heavily inspired by the amazing **ProcDoc** addon created by **ZephyrSong**.
-
-Huge thanks for the original project:
-
-https://github.com/thezephyrsong/ProcDoc
-
-AuraCore expands upon the original idea with additional features such as a customizable Buff Tracker, Expiring Buff Alerts, improved customization, and numerous quality-of-life improvements while remaining optimized for Vanilla WoW.
-
----
-
-## 📜 License
-
-MIT License
+Third-party assets remain subject to their included licenses. Original AuraCore code is provided for use with the addon repository.
