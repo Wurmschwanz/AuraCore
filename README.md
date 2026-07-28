@@ -53,7 +53,7 @@ World of Warcraft/Interface/AddOns/
 ## 💬 Slash Commands
 
 ```text
-/ac
+/pc
 ```
 
 or
