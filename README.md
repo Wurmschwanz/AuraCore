@@ -1,81 +1,112 @@
-# AuraCore
+# ✨ AuraCore
 
-AuraCore is a lightweight all-in-one aura, proc, cooldown, and buff-tracking addon for Turtle WoW and other Vanilla WoW 1.12 clients.
+> **Modern Buff, Proc & Aura Tracking for Vanilla World of Warcraft (1.12)**
 
-## Features
+AuraCore is a lightweight addon that combines **Proc Alerts**, **Buff Tracking**, and **Expiring Buff Notifications** into one clean and highly customizable package.
 
-### Cooldown Pulses
-- Large central pulse when tracked cooldowns become ready
-- Spell, equipment, and bag-item support
-- Character-specific filters
-- Adjustable size, duration, opacity, animation, and position
+Designed specifically for **Turtle WoW**, but compatible with other Vanilla 1.12 clients.
 
-### Buff Expiration Pulses
-- Alerts when tracked buffs are about to expire
-- Automatic long-duration buff detection
-- Additional buff list and blacklist
-- Optional red expiration pulse
-- Test button included
+---
 
-### Proc Alerts
-- ProcDoc-inspired class overlays
-- Buff- and action-based proc detection
-- Per-proc scale, opacity, and position settings
-- Optional pulse and smooth visual expiry
-- Multi-proc test mode
+## 📥 Download
 
-### Active Buff Tracker
-- Clickable tracker slots
-- Tracks buffs, talent procs, and trinket procs while active
-- Empty and inactive slots stay hidden
-- Blizzard-style cooldown sweep
-- Adjustable icon size, spacing, columns, and position
-- Per-character configuration
-- Test mode and unlockable drag handle
+➡️ **Latest Release**
 
-### Performance
-- Event-driven aura updates with adaptive fallback scans
-- No scans while the tracker is disabled or empty
-- Cached buff names and icons
-- Layout and cooldown updates only when required
+https://github.com/Wurmschwanz/AuraCore/releases/latest
 
-## Installation
+---
 
-1. Download the latest release ZIP.
-2. Extract it.
-3. Copy the `AuraCore` folder into:
+## 🌟 Features
 
-   `World of Warcraft\Interface\AddOns\`
+### ⚡ Proc Alerts
+- Talent proc tracking
+- Trinket proc tracking
+- Weapon & spell proc support
+- Built-in test mode
 
-4. Restart the game or use `/reload`.
+### 🛡️ Buff Tracker
+- Track any player buff
+- Automatic icon detection
+- Blizzard cooldown spiral
+- Draggable & fully customizable
+- Shows active buffs only
 
-The final path must be:
+### ⏳ Expiring Buff Alerts
+- Buff expiration pulse
+- Optional red warning pulse
+- Blacklist support
+- Individual buff settings
 
-`World of Warcraft\Interface\AddOns\AuraCore\AuraCore.toc`
+### ⚙️ Customization
+- Per-character settings
+- Unlock & move UI
+- Individual proc configuration
+- Test mode
 
-## Commands
+### 🚀 Performance
+- Lightweight
+- Event-driven
+- Low CPU usage
+- Raid friendly
+- Optimized for Vanilla 1.12
 
-- `/ac` — Open settings
-- `/ac test` — Test the main pulse
-- `/ac reset` — Reset settings
-- `/ac ignore NAME` — Add an entry to the cooldown filter
-- `/ac clear` — Clear the cooldown filter
-- `/ac invert` — Toggle cooldown filter mode
-- `/ac list` — Show the cooldown filter
+---
 
-Legacy `/pc`, `/pulsecore`, and `/dcp` commands remain supported.
+## 📸 Screenshots
 
-## Updating from PulseCore
+*Coming soon!*
 
-AuraCore keeps the existing `DCP_Saved` and `DCP_SavedPerCharacter` SavedVariables, so current PulseCore settings are retained.
+---
 
-Remove the old `PulseCore` addon folder after installing AuraCore to avoid loading both versions simultaneously.
+## 🖥️ Compatibility
 
-## Credits
+- ✅ Turtle WoW
+- ✅ Vanilla 1.12
+- ✅ SuperWoW *(recommended)*
 
-- Proc overlay artwork and proc data are based on ProcDoc. See `LICENSE-ProcDoc`.
-- Additional overlay artwork is based on SpellActivationOverlay. See `LICENSE-SpellActivationOverlay`.
+---
 
-## License
+## 📦 Installation
 
-Third-party assets remain subject to their included licenses. Original AuraCore code is provided for use with the addon repository.
+1. Download the latest release.
+2. Extract the archive.
+3. Copy the **AuraCore** folder into:
+
+```text
+World of Warcraft/Interface/AddOns/
+```
+
+4. Restart the game.
+
+---
+
+## 💬 Slash Commands
+
+```text
+/ac
+```
+
+or
+
+```text
+/auracore
+```
+
+---
+
+## ❤️ Credits
+
+Special thanks to **ZephyrSong** for creating the fantastic **ProcDoc** addon, which inspired AuraCore.
+
+ProcDoc Repository:
+https://github.com/thezephyrsong/ProcDoc
+
+AuraCore expands upon the original idea with a customizable Buff Tracker, Expiring Buff Alerts, improved customization, and numerous quality-of-life improvements while remaining lightweight and optimized for Vanilla WoW.
+
+Thanks to everyone who tested AuraCore and helped improve the addon. ❤️
+
+---
+
+## 📜 License
+
+MIT License
