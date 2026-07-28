@@ -1,53 +1,81 @@
-# PulseCore
+# ✨ AuraCore
 
-A lightweight, high-performance cooldown and buff pulse addon for **Vanilla WoW 1.12** and **Turtle WoW**.
+> **Modern Buff, Proc & Aura Tracking for Vanilla World of Warcraft (1.12)**
+
+AuraCore combines **Proc Alerts**, **Buff Tracking**, and **Expiring Buff Warnings** in one lightweight addon, designed specifically for Vanilla 1.12 servers like **Turtle WoW**.
+
+---
 
 ## 📥 Download
 
 Download the latest version from the **Releases** page.
 
-https://github.com/Wurmschwanz/PulseCore/releases/latest
+https://github.com/Wurmschwanz/AuraCore/releases/latest
 
 ---
 
-## ✨ Features
+## 🌟 Features
 
-- ⚡ Cooldown completion alerts
-- 🎒 Ability, item & trinket support
-- 🛡️ Buff expiration notifications
-- 🍖 Automatic tracking of long-duration buffs
-- ➕ Additional custom buff tracking
-- 🚫 Optional buff blacklist
-- 🎯 Cooldown blacklist & whitelist
-- 📏 Adjustable icon size & pulse duration
-- 📝 Optional spell & item names
-- 📍 Movable pulse position
-- 🗺️ Movable minimap button
-- 🚀 Optimized for maximum performance
-- 🔥 No external libraries required
+- ⚡ Modern proc alerts
+- 🛡️ Custom buff tracker
+- ⏳ Expiring buff notifications
+- 🎨 Automatic icon detection
+- 🔄 Blizzard cooldown spiral
+- ⚙️ Fully customizable
+- 👤 Per-character settings
+- 🧪 Built-in test mode
+- 🚀 Lightweight & performance optimized
+
+---
+
+## 🖥️ Compatibility
+
+- ✅ Turtle WoW
+- ✅ Vanilla 1.12
+- ✅ SuperWoW
+
+---
 
 ## 📦 Installation
 
 1. Download the latest release.
 2. Extract the archive.
-3. Copy the **PulseCore** folder into your `Interface/AddOns` directory.
-4. Restart the game or type `/reload`.
+3. Copy the **AuraCore** folder into:
 
-## 💬 Commands
+```text
+World of Warcraft/Interface/AddOns/
+```
 
-- `/pc` – Open the settings
-- `/pulsecore` – Open the settings
-- `/dcp` – Legacy command
-
-## ✅ Compatibility
-
-- Turtle WoW
-- Vanilla WoW 1.12
-- Blizzard UI
-- pfUI
-- DragonflightUI3
-- ShaguTweaks
+4. Restart the game.
 
 ---
 
-Made with ❤️ by **Wurmschwanz**
+## 💬 Slash Commands
+
+```text
+/ac
+```
+
+or
+
+```text
+/auracore
+```
+
+---
+
+## ❤️ Credits
+
+AuraCore is heavily inspired by the amazing **ProcDoc** addon created by **ZephyrSong**.
+
+Huge thanks for the original project:
+
+https://github.com/thezephyrsong/ProcDoc
+
+AuraCore expands upon the original idea with additional features such as a customizable Buff Tracker, Expiring Buff Alerts, improved customization, and numerous quality-of-life improvements while remaining optimized for Vanilla WoW.
+
+---
+
+## 📜 License
+
+MIT License
