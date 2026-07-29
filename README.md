@@ -4,7 +4,7 @@
 
 AuraCore is a lightweight addon that combines **Proc Alerts**, **Buff Tracking**, and **Expiring Buff Notifications** into one clean and highly customizable package.
 
-Designed specifically for **Turtle WoW**, but compatible with other Vanilla 1.12 clients.
+Designed specifically for **OctoWoW**, but compatible with other Vanilla 1.12 clients.
 
 ---
 
