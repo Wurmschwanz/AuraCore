@@ -8,13 +8,6 @@ Designed specifically for **OctoWoW**, but compatible with other Vanilla 1.12 cl
 
 ---
 
-## 📥 Download
-
-➡️ **Latest Release**
-
-https://github.com/Wurmschwanz/AuraCore/releases/latest
-
----
 
 ## 🌟 Features
 
