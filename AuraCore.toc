@@ -1,0 +1,12 @@
+## Interface: 11200
+## Title: AuraCore
+## Notes: Lightweight cooldown pulses, proc alerts, buff expiration warnings, and active buff tracking for Turtle WoW and Vanilla 1.12.
+## Author: Wurmschwanz
+## Version: 2.2.0-test17
+## SavedVariables: DCP_Saved
+## SavedVariablesPerCharacter: DCP_SavedPerCharacter
+AuraCore.lua
+AuraCache.lua
+BuffTracker.lua
+ProcDocData.lua
+ProcAlerts.lua

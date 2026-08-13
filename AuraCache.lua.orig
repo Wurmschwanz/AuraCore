@@ -1,0 +1,189 @@
+-- AuraCore central player buff cache for Vanilla / Turtle WoW 1.12.
+-- Buffs only: no target auras, debuffs, DoTs, nameplates, or raid scanning.
+-- All modules should consume this cache instead of scanning player buffs again.
+-- SuperWoW fields are optional; Vanilla buff data remains available without them.
+
+AuraCoreAuraCache = AuraCoreAuraCache or {}
+local Cache = AuraCoreAuraCache
+
+local MAX_BUFFS = 32
+local buffs = {}
+local maxStacksBySpell = {}
+local stackCapableBySpell = {}
+local superSupported = type(GetUnitField) == "function"
+local lastRefresh = 0
+
+local scanTip = CreateFrame("GameTooltip", "AuraCoreAuraCacheTooltip", UIParent, "GameTooltipTemplate")
+
+local i
+for i = 1, MAX_BUFFS do
+    buffs[i] = {
+        spellID = nil,
+        name = nil,
+        texture = nil,
+        remaining = nil,
+        buffIndex = nil,
+        stacks = nil,
+        maxStacks = nil,
+    }
+end
+
+local function WipeSlot(slot)
+    local entry = buffs[slot]
+    entry.spellID = nil
+    entry.name = nil
+    entry.texture = nil
+    entry.remaining = nil
+    entry.buffIndex = nil
+    entry.stacks = nil
+    entry.maxStacks = nil
+end
+
+local function GetMaxStacks(spellID)
+    if not spellID or spellID == 0 then return nil end
+    local cached = maxStacksBySpell[spellID]
+    if cached ~= nil then
+        return cached > 0 and cached or nil
+    end
+
+    local value = nil
+    if type(GetSpellRecField) == "function" then
+        value = tonumber(GetSpellRecField(spellID, "stackAmount"))
+    end
+    maxStacksBySpell[spellID] = value or 0
+    return value
+end
+
+local function ReadBuffName(buffIndex)
+    if not buffIndex or buffIndex < 0 then return nil end
+    scanTip:SetOwner(UIParent, "ANCHOR_NONE")
+    scanTip:ClearLines()
+    scanTip:SetPlayerBuff(buffIndex)
+    local line = getglobal("AuraCoreAuraCacheTooltipTextLeft1")
+    local name = line and line:GetText() or nil
+    scanTip:Hide()
+    return name
+end
+
+function Cache.IsSupported()
+    -- The cache itself works on Vanilla. This flag indicates only whether the
+    -- optional SuperWoW spell-ID/application fields are available.
+    return true
+end
+
+function Cache.IsSuperWoWSupported()
+    return superSupported
+end
+
+function Cache.Refresh()
+    local auraSpellIDs = nil
+    local auraApplications = nil
+    if superSupported then
+        auraSpellIDs = GetUnitField("player", "aura")
+        auraApplications = GetUnitField("player", "auraApplications")
+        if type(auraSpellIDs) ~= "table" then auraSpellIDs = nil end
+        if type(auraApplications) ~= "table" then auraApplications = nil end
+    end
+
+    for i = 1, MAX_BUFFS do
+        local visibleSlot = i - 1
+        local buffIndex = GetPlayerBuff and GetPlayerBuff(visibleSlot, "HELPFUL") or nil
+        if buffIndex and buffIndex >= 0 then
+            local entry = buffs[i]
+            -- GetPlayerBuff() returns the actual player-aura slot. SuperWoW's
+            -- aura/auraApplications arrays are keyed by that aura slot, not by
+            -- the filtered visible-buff position used by this loop.
+            local auraSlot = buffIndex + 1
+            local spellID = auraSpellIDs and auraSpellIDs[auraSlot] or nil
+            if spellID == 0 then spellID = nil end
+
+            entry.spellID = spellID
+            entry.buffIndex = buffIndex
+            entry.texture = GetPlayerBuffTexture and GetPlayerBuffTexture(buffIndex) or nil
+            entry.name = ReadBuffName(buffIndex)
+            entry.remaining = GetPlayerBuffTimeLeft and (GetPlayerBuffTimeLeft(buffIndex) or 0) or 0
+            entry.maxStacks = GetMaxStacks(spellID)
+
+            local rawStacks = auraApplications and auraApplications[auraSlot] or nil
+            local superStacks = tonumber(rawStacks)
+            if superStacks ~= nil then
+                -- SuperWoW auraApplications is zero-based: 0 = one application.
+                superStacks = superStacks + 1
+            end
+
+            local playerStacks = nil
+            if type(GetPlayerBuffApplications) == "function" then
+                playerStacks = tonumber(GetPlayerBuffApplications(buffIndex))
+            end
+
+            -- A value of 1 alone is ambiguous on Vanilla/Turtle: ordinary buffs
+            -- report one application too. Only mark a spell as stack-capable
+            -- after spell data or a live source has actually proven >1 stacks.
+            if (entry.maxStacks and entry.maxStacks > 1)
+               or (playerStacks and playerStacks > 1)
+               or (superStacks and superStacks > 1) then
+                if spellID then stackCapableBySpell[spellID] = true end
+                -- Some custom auras may not expose a spell ID. Remember the
+                -- capability on the live entry for this refresh as well.
+                entry._stackCapable = true
+            else
+                entry._stackCapable = spellID and stackCapableBySpell[spellID] or false
+            end
+
+            if entry._stackCapable then
+                local resolved = nil
+                if playerStacks and playerStacks > 0 then resolved = playerStacks end
+                if superStacks and superStacks > 0 and (not resolved or superStacks > resolved) then
+                    resolved = superStacks
+                end
+                entry.stacks = resolved
+            else
+                entry.stacks = nil
+            end
+        else
+            WipeSlot(i)
+        end
+    end
+
+    lastRefresh = GetTime and GetTime() or 0
+    return true
+end
+
+function Cache.GetBuffBySlot(slot)
+    return buffs[slot]
+end
+
+-- Alias with a more explicit name for new consumers.
+function Cache.GetAuraBySlot(slot)
+    return buffs[slot]
+end
+
+function Cache.GetSpellIDBySlot(slot)
+    local entry = buffs[slot]
+    return entry and entry.spellID or nil
+end
+
+function Cache.GetChargesBySlot(slot, buffName)
+    local entry = buffs[slot]
+    if not entry or not entry.stacks then return nil end
+    if entry._stackCapable then return entry.stacks end
+    return nil
+end
+
+function Cache.GetLastRefresh()
+    return lastRefresh
+end
+
+function Cache.GetMaxSlots()
+    return MAX_BUFFS
+end
+
+local eventFrame = CreateFrame("Frame", "AuraCoreAuraCacheEventFrame", UIParent)
+eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+eventFrame:RegisterEvent("PLAYER_AURAS_CHANGED")
+eventFrame:RegisterEvent("VARIABLES_LOADED")
+eventFrame:SetScript("OnEvent", function()
+    Cache.Refresh()
+end)
+
+Cache.Refresh()
