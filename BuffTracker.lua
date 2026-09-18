@@ -45,6 +45,9 @@ local function Settings()
     if s.trackerTimerScale == nil then s.trackerTimerScale = 1.0 end
     if s.trackerTimerScale < 0.5 then s.trackerTimerScale = 0.5 end
     if s.trackerTimerScale > 2.0 then s.trackerTimerScale = 2.0 end
+    if s.trackerTimerYOffset == nil then s.trackerTimerYOffset = 0 end
+    if s.trackerTimerYOffset < -30 then s.trackerTimerYOffset = -30 end
+    if s.trackerTimerYOffset > 30 then s.trackerTimerYOffset = 30 end
     if s.trackerSpacing == nil then s.trackerSpacing = 6 end
     if s.trackerColumns == nil then s.trackerColumns = 6 end
     if s.trackerSlotCount == nil then s.trackerSlotCount = math.max(5, table.getn(s.trackedBuffs)) end
@@ -521,6 +524,14 @@ local function UpdateTrackerTimerFont(b, remaining)
     if b.acTimerFontSize ~= fontSize then
         b.durationText:SetFont(b.timerFont, fontSize, b.timerFlags)
         b.acTimerFontSize = fontSize
+    end
+
+    -- apply Y-Offset, change text anchor only when offset has changed
+    local yOffset = s and s.trackerTimerYOffset or 0
+    if b.acTimerYOffset ~= yOffset then
+        b.durationText:ClearAllPoints()
+        b.durationText:SetPoint("CENTER", b, "CENTER", 0, yOffset)
+        b.acTimerYOffset = yOffset
     end
 end
 
@@ -1119,6 +1130,8 @@ function Tracker.BuildOptions(page)
         function() return s.trackerColumns end, function(v) s.trackerColumns = v end)
     MakeSlider(page, "DCPTrackerTimerScaleSlider", "Timer Text Scale", 28, -250, 145, 0.5, 2.0, 0.1,
         function() return s.trackerTimerScale end, function(v) s.trackerTimerScale = v end,  10)
+    MakeSlider(page, "DCPTrackerTimerYOffsetSlider", "Timer Y-Offset", 215, -250, 145, -30, 30, 1,
+        function() return s.trackerTimerYOffset end, function(v) s.trackerTimerYOffset = v end)
 
     local red = CreateFrame("CheckButton", "DCPTrackerRedCheck", page, "UICheckButtonTemplate")
     red:SetWidth(24); red:SetHeight(24); red:SetPoint("TOPLEFT", page, "TOPLEFT", 16, -306)
